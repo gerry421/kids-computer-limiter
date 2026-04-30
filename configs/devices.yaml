@@ -28,8 +28,8 @@ devices:
     # Downtime: computer shuts down immediately if cron runs during this window.
     # Uses 24-hour format. Crossing midnight is supported (start > end).
     downtime_hours:
-      start: 22   # 10:00 p.m.
-      end: 6      # 6:00 a.m.
+      start: 18   # 6:00 p.m.
+      end: 7      # 7:00 a.m.
 
     # Entire domains to block (www. subdomain is also blocked automatically).
     blocked_domains:
@@ -39,6 +39,7 @@ devices:
       - "reddit.com"
       - "twitch.tv"
       - "roblox.com"
+      - "totallyscience.com"
 
     # URL path patterns — reserved for future use (hosts-file blocking is
     # domain-level; URL-level blocking requires a proxy and is not yet
@@ -54,8 +55,13 @@ devices:
       end: 7      # 7:00 a.m.
 
     blocked_domains:
+      - "youtube.com"
       - "tiktok.com"
+      - "discord.com"
       - "reddit.com"
+      - "twitch.tv"
+      - "roblox.com"
+      - "totallyscience.com"
 
     blocked_urls: []
 
