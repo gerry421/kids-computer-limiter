@@ -1,0 +1,72 @@
+# Kids Computer Limiter — Device Configuration
+#
+# This file defines restrictions for all managed devices.
+# The Pi fetches this file from GitHub every 5 minutes and applies
+# changes immediately — no restart required.
+#
+# DEVICE IDs must match exactly what was entered during setup.sh
+# (stored on the Pi at /etc/limiter/device_id.conf).
+#
+# Full documentation: docs/CONFIGURATION.md
+
+# ---------------------------------------------------------------------------
+# Global settings (apply to all devices unless overridden)
+# ---------------------------------------------------------------------------
+global:
+  update_interval: 300          # How often the Pi polls GitHub, in seconds
+  grace_period_before_shutdown: 0  # Seconds before shutdown (0 = immediate)
+
+# ---------------------------------------------------------------------------
+# Device configurations
+# ---------------------------------------------------------------------------
+devices:
+
+  - device_id: "frankie-pi"
+    enabled: true
+    notes: "Frankie's Raspberry Pi"
+
+    # Downtime: computer shuts down immediately if cron runs during this window.
+    # Uses 24-hour format. Crossing midnight is supported (start > end).
+    downtime_hours:
+      start: 22   # 10:00 p.m.
+      end: 6      # 6:00 a.m.
+
+    # Entire domains to block (www. subdomain is also blocked automatically).
+    blocked_domains:
+      - "youtube.com"
+      - "tiktok.com"
+      - "discord.com"
+      - "reddit.com"
+      - "twitch.tv"
+      - "roblox.com"
+
+    # URL path patterns — reserved for future use (hosts-file blocking is
+    # domain-level; URL-level blocking requires a proxy and is not yet
+    # implemented).
+    blocked_urls: []
+
+  - device_id: "john-pi"
+    enabled: true
+    notes: "John's Raspberry Pi"
+
+    downtime_hours:
+      start: 23   # 11:00 p.m.
+      end: 7      # 7:00 a.m.
+
+    blocked_domains:
+      - "tiktok.com"
+      - "reddit.com"
+
+    blocked_urls: []
+
+  # ---------------------------------------------------------------------------
+  # Template — copy this block and fill in values for each new device
+  # ---------------------------------------------------------------------------
+  # - device_id: "new-device-pi"
+  #   enabled: true
+  #   notes: ""
+  #   downtime_hours:
+  #     start: 22
+  #     end: 6
+  #   blocked_domains: []
+  #   blocked_urls: []
