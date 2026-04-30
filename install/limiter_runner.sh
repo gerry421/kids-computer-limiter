@@ -26,7 +26,8 @@ if [[ ! -f "$MAIN_SCRIPT" ]]; then
     exit 1
 fi
 
-python3 "$MAIN_SCRIPT" >> "$LOG_FILE" 2>&1
+cd "$INSTALL_DIR"
+python3 -m limiter.main >> "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
 if [[ $EXIT_CODE -ne 0 ]]; then

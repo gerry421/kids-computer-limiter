@@ -130,7 +130,8 @@ make_runner_executable() {
 
 run_once() {
     info "Running limiter once to verify setup…"
-    python3 "$INSTALL_DIR/limiter/main.py" && info "First run succeeded" \
+    cd "$INSTALL_DIR"
+    python3 -m limiter.main && info "First run succeeded" \
         || warn "First run exited with errors — check /var/log/limiter/limiter.log"
 }
 
