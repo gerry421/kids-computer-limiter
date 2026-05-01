@@ -42,7 +42,8 @@ devices:
       - "totallyscience.com"
       - "freezenova.com"
       - "cloudfront.net"
-
+      - "d11jzht7mj96rr.cloudfront.net"
+      
     # URL path patterns — reserved for future use (hosts-file blocking is
     # domain-level; URL-level blocking requires a proxy and is not yet
     # implemented).
@@ -64,6 +65,9 @@ devices:
       - "twitch.tv"
       - "roblox.com"
       - "totallyscience.com"
+      - "freezenova.com"
+      - "cloudfront.net"
+      - "d11jzht7mj96rr.cloudfront.net"
 
     blocked_urls: []
 
