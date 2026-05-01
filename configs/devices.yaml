@@ -41,6 +41,7 @@ devices:
       - "roblox.com"
       - "totallyscience.com"
       - "freezenova.com"
+      - "cloudfront.net"
 
     # URL path patterns — reserved for future use (hosts-file blocking is
     # domain-level; URL-level blocking requires a proxy and is not yet
