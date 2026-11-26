@@ -67,6 +67,19 @@ You should see lines like:
 2026-04-30T22:05:01 | INFO     | limiter.action       | [frankie-pi] [HOSTS_UPDATE] 6 domain(s) success=True
 ```
 
+To view the website-domain log on the Pi:
+
+```bash
+cd /opt/kids-computer-limiter
+sudo python3 -m limiter.history
+```
+
+The local log is not uploaded. See the README for supported browsers and
+limitations. Uninstalling offers to delete `/var/log/limiter`, including this log.
+Existing installations must update the installed code (for example, run
+`sudo git -C /opt/kids-computer-limiter pull --rebase`) to get new features;
+the five-minute check only fetches configuration, not code updates.
+
 ## Step 4 — Test downtime
 
 Temporarily set `downtime_hours.start` to the current hour in `devices.yaml`, push, wait up to 5 minutes, and the Pi should shut down.  Restore the value afterwards.
