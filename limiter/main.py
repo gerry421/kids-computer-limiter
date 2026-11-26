@@ -17,7 +17,7 @@ import logging
 import sys
 
 from limiter import logger as limiter_logger
-from limiter import config, enforcer, github_client
+from limiter import config, enforcer, github_client, history
 
 
 def main() -> int:
@@ -39,6 +39,9 @@ def main() -> int:
 
     log.info("Device ID: %s", device_id)
     limiter_logger.log_action("INFO", device_id, "STARTUP", "run started")
+
+    # Keep website history local and collect even if GitHub is unavailable.
+    history.collect()
 
     # -----------------------------------------------------------------------
     # 3. Fetch config
