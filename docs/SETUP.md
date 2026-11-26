@@ -70,15 +70,20 @@ You should see lines like:
 To view the website-domain log on the Pi:
 
 ```bash
-cd /opt/kids-computer-limiter
-sudo python3 -m limiter.history
+cd /opt/kids-computer-limiter && sudo python3 -m limiter.history
 ```
 
 The local log is not uploaded. See the README for supported browsers and
 limitations. Uninstalling offers to delete `/var/log/limiter`, including this log.
-Existing installations must update the installed code (for example, run
-`sudo git -C /opt/kids-computer-limiter pull --rebase`) to get new features;
-the five-minute check only fetches configuration, not code updates.
+To update installed code after changes are merged, run:
+
+```bash
+sudo git -c core.filemode=false -C /opt/kids-computer-limiter pull --rebase
+```
+
+The option ignores the installer's executable-bit change; other local changes
+may still need to be resolved before pulling. The five-minute check fetches
+configuration, but does not guarantee code updates.
 
 ## Step 4 — Test downtime
 
