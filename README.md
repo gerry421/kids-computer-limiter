@@ -29,6 +29,18 @@ Edit [`configs/devices.yaml`](configs/devices.yaml) directly on GitHub. Changes 
 
 See [docs/CONFIGURATION.md](docs/CONFIGURATION.md) for full reference.
 
+## Updating installed code
+
+After code changes are merged, run this on each Pi:
+
+```bash
+sudo git -c core.filemode=false -C /opt/kids-computer-limiter pull --rebase
+```
+
+This ignores the installer's executable-bit change when checking for local
+modifications. Other local changes may still need to be resolved before pulling.
+Configuration changes are fetched automatically, but code updates are not guaranteed.
+
 ## Monitoring
 
 ```bash
@@ -39,8 +51,7 @@ tail -f /var/log/limiter/limiter.log
 cat logs/execution_log.txt
 
 # Local website history on the Pi (UTC timestamp, domain, browser profile)
-cd /opt/kids-computer-limiter
-sudo python3 -m limiter.history
+cd /opt/kids-computer-limiter && sudo python3 -m limiter.history
 ```
 
 Website history is kept only on the Pi in `/var/log/limiter/website_visits.sqlite3`,
