@@ -132,5 +132,6 @@ def test_update_browser_policy(tmp_path, monkeypatch):
     monkeypatch.setattr(enforcer, "POLICY_FILES", (str(f),))
     assert enforcer.update_browser_policy(["youtube.com", "a.io", "youtube.com"])
     d = json.loads(f.read_text())
-    assert d["URLBlocklist"] == ["a.io", "youtube.com"]
+    assert "youtube.com" in d["URLBlocklist"] and "a.io" in d["URLBlocklist"]
+    assert d["ExtensionInstallBlocklist"] == ["*"]
     assert d["DnsOverHttpsMode"] == "off"

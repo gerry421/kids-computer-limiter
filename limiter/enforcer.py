@@ -201,15 +201,33 @@ POLICY_FILES = (
 )
 
 
+# Extensions allowed to stay installed; every other extension is blocked
+# and removed (games ship as offline extensions that domain blocks can't stop).
+ALLOWED_EXTENSIONS = (
+    "aleakchihdccplidncghkekgioiakgal",  # h264ify
+    "ddkjiahejlhfcafbddmgiahcphecmpfh",  # uBlock Origin Lite
+    "fbgcedjacmlbgleddnoacbnijgmiolem",  # Microsoft Bing Search with Rewards
+)
+# Always blocked in the browser regardless of the per-device list.
+EXTRA_BLOCKED_URLS = (
+    "chromewebstore.google.com",
+    "chrome.google.com/webstore",
+    "google.com/chrome",
+    "dl.google.com",
+)
+
+
 def update_browser_policy(blocked_domains: list[str]) -> bool:
     """
     Write a managed Chromium/Chrome policy that blocks every listed domain
     and all of its subdomains, and disables DNS-over-HTTPS so the hosts
     file keeps working. Returns True if at least one file was written.
     """
-    domains = sorted({d for d in blocked_domains if d})
+    domains = sorted({d for d in blocked_domains if d} | set(EXTRA_BLOCKED_URLS))
     policy = {
         "URLBlocklist": domains,
+        "ExtensionInstallBlocklist": ["*"],
+        "ExtensionInstallAllowlist": list(ALLOWED_EXTENSIONS),
         "DnsOverHttpsMode": "off",
     }
     wrote = False
