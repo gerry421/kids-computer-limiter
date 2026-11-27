@@ -10,6 +10,7 @@ Two main responsibilities
    block can be removed in one sweep to undo all restrictions.
 """
 
+import json
 import logging
 import os
 import subprocess
@@ -188,3 +189,41 @@ def clear_hosts_block() -> bool:
     Returns True on success.
     """
     return update_hosts_file([])
+
+
+# ---------------------------------------------------------------------------
+# Browser policy (wildcard blocking: a listed domain also blocks subdomains)
+# ---------------------------------------------------------------------------
+
+POLICY_FILES = (
+    "/etc/chromium/policies/managed/limiter.json",
+    "/etc/opt/chrome/policies/managed/limiter.json",
+)
+
+
+def update_browser_policy(blocked_domains: list[str]) -> bool:
+    """
+    Write a managed Chromium/Chrome policy that blocks every listed domain
+    and all of its subdomains, and disables DNS-over-HTTPS so the hosts
+    file keeps working. Returns True if at least one file was written.
+    """
+    domains = sorted({d for d in blocked_domains if d})
+    policy = {
+        "URLBlocklist": domains,
+        "DnsOverHttpsMode": "off",
+    }
+    wrote = False
+    for path in POLICY_FILES:
+        try:
+            os.makedirs(os.path.dirname(path), mode=0o755, exist_ok=True)
+            tmp = path + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as fh:
+                json.dump(policy, fh, indent=1)
+            os.chmod(tmp, 0o644)
+            os.replace(tmp, path)
+            wrote = True
+        except OSError as exc:
+            logger.error("Cannot write browser policy %s: %s", path, exc)
+    if wrote:
+        logger.info("Browser policy updated — %d domains", len(domains))
+    return wrote

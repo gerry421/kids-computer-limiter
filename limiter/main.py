@@ -106,6 +106,15 @@ def main() -> int:
         success=success,
     )
 
+    policy_ok = enforcer.update_browser_policy(blocked_domains)
+    limiter_logger.log_action(
+        "INFO" if policy_ok else "ERROR",
+        device_id,
+        "BROWSER_POLICY",
+        f"{len(blocked_domains)} domain(s)",
+        success=policy_ok,
+    )
+
     # -----------------------------------------------------------------------
     # 7. Remote log commit (rate-limited)
     # -----------------------------------------------------------------------

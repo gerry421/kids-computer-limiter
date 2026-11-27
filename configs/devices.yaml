@@ -43,6 +43,13 @@ devices:
       - "youtubekids.com"
       - "googlevideo.com"
       - "ytimg.com"
+      - "m.youtube.com"
+      - "music.youtube.com"
+      - "studio.youtube.com"
+      - "yt3.ggpht.com"
+      - "ggpht.com"
+      - "jnn-pa.googleapis.com"
+      - "youtube-ui.l.google.com"
 
       # Subscription video streaming
       - "netflix.com"
@@ -819,6 +826,13 @@ devices:
       - "youtubekids.com"
       - "googlevideo.com"
       - "ytimg.com"
+      - "m.youtube.com"
+      - "music.youtube.com"
+      - "studio.youtube.com"
+      - "yt3.ggpht.com"
+      - "ggpht.com"
+      - "jnn-pa.googleapis.com"
+      - "youtube-ui.l.google.com"
 
       # Subscription video streaming
       - "netflix.com"

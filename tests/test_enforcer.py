@@ -123,3 +123,14 @@ class TestUpdateHostsFile(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def test_update_browser_policy(tmp_path, monkeypatch):
+    import json
+    from limiter import enforcer
+    f = tmp_path / "pol" / "limiter.json"
+    monkeypatch.setattr(enforcer, "POLICY_FILES", (str(f),))
+    assert enforcer.update_browser_policy(["youtube.com", "a.io", "youtube.com"])
+    d = json.loads(f.read_text())
+    assert d["URLBlocklist"] == ["a.io", "youtube.com"]
+    assert d["DnsOverHttpsMode"] == "off"

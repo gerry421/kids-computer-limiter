@@ -20,7 +20,6 @@ env/
 
 # Log files (logs/ in repo only keeps .gitkeep; actual logs committed by Pi)
 logs/*.log
-logs/*.txt
 !logs/.gitkeep
 
 # macOS
