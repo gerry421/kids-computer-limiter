@@ -27,8 +27,8 @@ devices:
     # Downtime: computer shuts down immediately if cron runs during this window.
     # Uses 24-hour format. Crossing midnight is supported (start > end).
     downtime_hours:
-      start: 18   # 6:00 p.m.
-      end: 7      # 7:00 a.m.
+      start: 0    # midnight
+      end: 23     # 11:00 p.m. (only allowed on 11:00-11:59 p.m.)
 
     # Hostnames to block. The enforcer also adds www.; it does not wildcard subdomains.
     blocked_domains:
